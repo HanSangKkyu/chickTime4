@@ -5,13 +5,15 @@ import android.media.MediaPlayer;
 import java.util.ArrayList;
 
 public class FF {
+    String company;
     String name;//제품 이름
     ArrayList<Integer> time;
     ArrayList<Integer> time_p;
     boolean isActive; // 현재 타이머가 동작하고 있는지 알려주는 변수
     public MediaPlayer mediaPlayer; // 알람음을 울리게 해주는 필드
 
-    public FF(String name, ArrayList<Integer> time, ArrayList<Integer> time_p, boolean isActive) {
+    public FF(String company, String name, ArrayList<Integer> time, ArrayList<Integer> time_p, boolean isActive) {
+        this.company = company;
         this.name = name;
         this.time = time;
         this.time_p = time_p;

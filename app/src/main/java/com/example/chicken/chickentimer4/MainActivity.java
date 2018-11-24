@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Log.i("test", FFName + "");
-        FF ff = new FF(FFName, times, time_p, false);
+        FF ff = new FF(conName, FFName, times, time_p, false);
 
         if (isMax(registedList, MAX)) { // 타이머가 가득 등록됐다면
             registOnQueue(ff); // 대기큐에 등록하기
