@@ -246,11 +246,14 @@ public class MainActivity extends AppCompatActivity {
         arrayAdapter.notifyDataSetChanged();
     }
 
-    private void registOnQueue(FF ff) { // 데이큐에 등록
+    private void registOnQueue(FF ff) { // 대기큐에 등록
         queue.add(ff);
         // queueadapter = new QueueAdapter(queue);
         queueadapter.notifyDataSetChanged();
     }
 
-
+    public void onQueueDeleteBtnClicked(View view) {
+        queue.remove(0);
+        queueadapter.notifyDataSetChanged();
+    }
 }
