@@ -3,6 +3,7 @@ package com.example.chicken.chickentimer4;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +20,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Locale;
+
+import static android.speech.tts.TextToSpeech.ERROR;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     LinearLayoutManager layoutManager; // RecyclerView 설정을 수평으로 만들어 주기 위함
     RecyclerView recyclerView; // 대기큐를 출력하는데 사용하는 RecyclerView
 
+    static TextToSpeech tts;// tts 객체 생성
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,6 +165,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        // TTS를 생성하고 OnInitListener로 초기화 한다.
+        tts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status != ERROR) {
+                    // 언어를 선택한다.
+                    tts.setLanguage(Locale.KOREAN); // 한국어로 설정
+                }
+            }
+        });
     }
 
     public void onButton1Clicked(View view) {

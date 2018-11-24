@@ -2,6 +2,7 @@ package com.example.chicken.chickentimer4;
 
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,11 +14,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import static com.example.chicken.chickentimer4.MainActivity.arrayAdapter;
 import static com.example.chicken.chickentimer4.MainActivity.registedList;
+import static com.example.chicken.chickentimer4.MainActivity.tts;
 
 public class FFAdapter extends ArrayAdapter<FF> {
     List<FF> mFF;
@@ -25,6 +28,9 @@ public class FFAdapter extends ArrayAdapter<FF> {
     Button stbtn;
     Button stopbtn;
     int num = 1;
+    int ActiveTimeNum = 0;
+    boolean updateSign = false;
+
 
     //  ArrayList<Timer> timer;
 
@@ -34,6 +40,8 @@ public class FFAdapter extends ArrayAdapter<FF> {
         this.mFF = objects;
 
         //  timer = new ArrayList<>();
+
+        AlertTimerEnd();
     }
 
     @Override
@@ -70,7 +78,8 @@ public class FFAdapter extends ArrayAdapter<FF> {
             @Override
             public void onClick(View view) {
                 // 알람 종료
-                stopAlarm(position);
+                //stopAlarm(position);
+
 
                 //   registedList.get(position).setActive(false);
                 registedList.remove(position);
@@ -129,7 +138,7 @@ public class FFAdapter extends ArrayAdapter<FF> {
             @Override
             public void onClick(View view) {
                 // 알람 종료
-                stopAlarm(position);
+                //stopAlarm(position);
 
 
                 //Toast.makeText(getContext(), "clicked", Toast.LENGTH_SHORT).show();
@@ -205,7 +214,10 @@ public class FFAdapter extends ArrayAdapter<FF> {
                     Log.i("POSITION DIE", "DIE");
 
                     // 알람 종료
-                    stopAlarm(position);
+                    //stopAlarm(position);
+                    //updateSign = true;
+                    //cntActiveTimeNum();
+
                     break;
                 }
                 boolean chk = registedList.get(position).isActive;
@@ -220,7 +232,7 @@ public class FFAdapter extends ArrayAdapter<FF> {
                     registedList.get(position).setActive(false);
 
                     // 알람 시작
-                    startAlarm(position);
+                    //startAlarm(position);
                     break;
                 }
             } catch (Exception e) {
@@ -248,4 +260,29 @@ public class FFAdapter extends ArrayAdapter<FF> {
         }
     }
 
+    private void AlertTimerEnd() { // 현재 울리고 있는 타이머의 개수를 센다.
+        new Thread(new Runnable() {
+            public void run() {
+                while (true) {
+                    try {
+                        ActiveTimeNum = 0;
+                        for (int i = 0; i < registedList.size(); i++) {
+                            if (registedList.get(i).isActive == false && registedList.get(i).getTime_p().get(0) > 0) {
+                                ActiveTimeNum++;
+                            }
+                        }
+                        Log.i("tts", String.valueOf(ActiveTimeNum) + " ");
+
+                        if (ActiveTimeNum >= 1) { // 한개 이상이면
+                            tts.speak(String.valueOf(ActiveTimeNum), TextToSpeech.QUEUE_FLUSH, null);
+                        } else if (ActiveTimeNum == 0) {
+                            //아무 일도 일어나지 않는다.
+                        }
+                        Thread.sleep(500);
+                    } catch (Throwable t) {
+                    }
+                }
+            }
+        }).start();
+    }
 }
