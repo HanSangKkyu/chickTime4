@@ -14,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -29,7 +28,6 @@ public class FFAdapter extends ArrayAdapter<FF> {
     Button stopbtn;
     int num = 1;
     int ActiveTimeNum = 0;
-    boolean updateSign = false;
 
 
     //  ArrayList<Timer> timer;
