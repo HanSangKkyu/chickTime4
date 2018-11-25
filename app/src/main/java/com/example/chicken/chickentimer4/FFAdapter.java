@@ -264,7 +264,7 @@ public class FFAdapter extends ArrayAdapter<FF> {
                 while (true) {
                     try {
                         ActiveTimeNum = 0;
-                        for (int i = 0; i < registedList.size(); i++) {
+                            for (int i = 0; i < registedList.size(); i++) {
                             if (registedList.get(i).isActive == false && registedList.get(i).getTime_p().get(0) > 0) {
                                 ActiveTimeNum++;
                             }

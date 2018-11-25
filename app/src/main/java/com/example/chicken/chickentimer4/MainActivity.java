@@ -253,7 +253,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onQueueDeleteBtnClicked(View view) {
-        queue.remove(0);
-        queueadapter.notifyDataSetChanged();
+        if (queue.size() > 0) {
+            queue.remove(0);
+            queueadapter.notifyDataSetChanged();
+        } else {
+            Toast.makeText(this, "큐가 비어있습니다.", Toast.LENGTH_SHORT);
+        }
     }
 }
