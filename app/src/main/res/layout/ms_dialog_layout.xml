@@ -2,28 +2,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="300dp"
     android:layout_height="400dp"
-    android:orientation="vertical"
+    android:layout_gravity="center"
     android:gravity="center"
-    android:layout_gravity="center">
+    android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <TextView
             android:id="@+id/which"
-            android:text="00 편의점 메뉴 관리"
-            android:textStyle="bold"
-            android:padding="10dp"
-            android:background="#56a383"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="#56a383"
+            android:padding="10dp"
+            android:text="00 편의점 메뉴 관리"
+            android:textStyle="bold" />
+
         <Button
-            android:text="X"
             android:id="@+id/msClose"
-            android:textStyle="bold"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_height="wrap_content" />
+            android:text="X"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
@@ -32,35 +35,39 @@
 
         <EditText
             android:id="@+id/menuName"
-            android:hint="메뉴명"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+            android:hint="메뉴명" />
+
         <EditText
-            android:hint="시간"
             android:id="@+id/first"
-            android:inputType="number"
-            android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content" />
-        <EditText
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:hint="시간"
+            android:inputType="number" />
+
+        <EditText
             android:id="@+id/second"
-            android:inputType="number"
-            android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="시간"
+            android:inputType="number" />
+
         <Button
-            android:text="등록"
             android:id="@+id/addBtn"
-            android:textSize="9sp"
-            android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="등록"
+            android:textSize="9sp" />
     </LinearLayout>
+
     <ListView
         android:id="@+id/menuList"
-        android:numColumns="2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="wrap_content"
+        android:numColumns="2"></ListView>
 </LinearLayout>

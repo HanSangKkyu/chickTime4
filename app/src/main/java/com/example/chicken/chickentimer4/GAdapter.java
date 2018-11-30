@@ -13,79 +13,60 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.chicken.chickentimer4.MainActivity.c;
+import static com.example.chicken.chickentimer4.MainActivity.gDialog;
+import static com.example.chicken.chickentimer4.MainActivity.msAdapter;
+import static com.example.chicken.chickentimer4.MainActivity.msDialog;
+import static com.example.chicken.chickentimer4.MainActivity.msList;
 
-public class GAdapter extends ArrayAdapter<FF> {
-    List<FF> mFF;
+
+public class GAdapter extends ArrayAdapter<String> {
+    List<String> csString; // 편의점 이름
     Button delCssBtn;
     Context context;
-    TextView csname;
+    TextView csname; // 편의점 이름을 출력하는 텍스트 뷰
+    ImageView csBack;
 
-    public GAdapter( @NonNull Context context, int resource, @NonNull List<FF> objects) {
+    public GAdapter(@NonNull Context context, int resource, @NonNull List<String> objects) {
         super(context, resource, objects);
-        this.mFF = objects;
+        this.csString = objects;
         this.context = context;
         Log.i("test_", "GAdapter");
     }
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView,  @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View v = convertView;
-        GAdapterHolder holder;
-        Log.i("test_", "GAdapter+getView");
 
-        if(v==null){
-            Log.i("test_", "GAdapter+getView_ifnull");
+        if (v == null) {
             LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = vi.inflate(R.layout.ms_dialog_layout, null);
-            csname = (TextView)v.findViewById(R.id.csname);
-
-            holder = new GAdapterHolder();
-            holder.cssTxt = csname;
-            v.setTag(holder);
-
-        }else{
-            Log.i("test_", "GAdapter+getView_elsenull");
-            holder = (GAdapterHolder)v.getTag();
-            csname = holder.cssTxt;
+            v = vi.inflate(R.layout.css_row, null);
         }
-        final FF ff = mFF.get(position);
-        if (ff != null) {
-            Log.i("test_", position + " " + mFF.get(position).getName() + "1");
-            Log.i("test_", position + " " + ff.getName() + "1");
-            csname = (TextView)v.findViewById(R.id.csname);
-            csname.setText(ff.getName().toString());
-        }
-        Log.i("test_", position + " " + mFF.get(position).getName() + "");
-        Log.i("test_", position + " " + ff.getName() + "");
-        csname.setText(ff.getName());
 
-
-        v.setOnClickListener(new View.OnClickListener() {
+        csname = (TextView) v.findViewById(R.id.csname);
+        csname.setText(csString.get(position)); // 편의점 이름 성절
+        csBack = (ImageView) v.findViewById(R.id.csBack);
+        csBack.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                //메뉴로 들어가기. 어떻게?
+            public void onClick(View v) {
+                msList = new ArrayList<>(c.get(csString.get(position)).keySet()); // 누른 버튼에 편의점으로 다이어로그를 세팅한다.
+                msAdapter = new MsAdapter(v.getContext(), R.layout.ms_dialog_layout, msList, csString.get(position));
+                msDialog = new MsDialog(v.getContext(), msAdapter, csString.get(position));
+                msDialog.show(); // 다음 다이얼로그 띄우기
+
+                gDialog.dismiss(); // 현재 다이얼로그 닫기
             }
         });
 
-        //holder.cssTxt.setText(ff.getName().toString());
-        holder.delbtn = v.findViewById(R.id.delCSBtn); // 메뉴 삭제하는 버튼
-        holder.delbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //FF에서 CSS 삭제하기
-            }
-        });
+        return v;
 
-        return super.getView(position, convertView, parent);
     }
 
-    class GAdapterHolder{
-        Button delbtn;
-        TextView cssTxt;
-    }
 
 }

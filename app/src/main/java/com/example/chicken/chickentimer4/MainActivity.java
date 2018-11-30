@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     Spinner spinner1; // 편의점을 선택하는 스피너
     Spinner spinner2; // ff 제품을 선택하는 스피너
-    HashMap<String, HashMap<String, ArrayList<Integer>>> c; // ff 제품에 대한 정보를 저장하고 있는 변수
+    static HashMap<String, HashMap<String, ArrayList<Integer>>> c; // ff 제품에 대한 정보를 저장하고 있는 변수
 
 
     static ListView listView; // 타이머를 표시해줄 리스트뷰
@@ -50,12 +50,17 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView; // 대기큐를 출력하는데 사용하는 RecyclerView
 
     static MsDialog msDialog;
-    ArrayList<FF> cssList;
-    ArrayList<FF> msList;
+    static ArrayList<String> msList; // 제품 정보가 아이템으로 들어가는 ArrayList
     static MsAdapter msAdapter;
+
     private Button startCssChange;
+    static ArrayList<String> cssList; // 편의점 브랜드가 아이템으로 들어가는 ArrayList
     static GDialog gDialog;
     static GAdapter gAdapter;
+
+    static ArrayAdapter arrayAdapter1;
+    static ArrayAdapter arrayAdapter2;
+
 
     static TextToSpeech tts;// tts 객체 생성
 
@@ -69,51 +74,44 @@ public class MainActivity extends AppCompatActivity {
         view_init();
         setMax(); // 타이머 최대치 설정
 
-        //ms_init();
-        css_init();
+        css_init(); // 편의점 수정 다이얼로그 설정 메소드
+        // ms_init(); // 메뉴 수정 다이얼로그 설정 메소드
 
     }
-/*
-    private void ms_init() {
-        msAdapter = new MsAdapter(this, R.layout.ms_dialog_layout, registedList);
 
-        startCssChange = (Button) findViewById(R.id.manageBtn);
-        startCssChange.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                msDialog = new MsDialog(view.getContext(), msAdapter, mregistClickListener, mClickCloseListener);
-                msDialog.show();
-            }
-        });
+//    private void ms_init() {
+//        msAdapter = new MsAdapter(this, R.layout.ms_dialog_layout, msList);
+//        msDialog = new MsDialog(this, msAdapter);
+//    }
 
-    }*/
     private void css_init() {
+        cssList = new ArrayList<>(c.keySet());
         gAdapter = new GAdapter(this, R.layout.css_dialog_layout, cssList);
 
         startCssChange = (Button) findViewById(R.id.manageBtn);
         startCssChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gDialog = new GDialog(view.getContext(), gAdapter, cregistClickListener, mClickCloseListener);
+                gDialog = new GDialog(view.getContext(), gAdapter);
                 gDialog.show();
             }
         });
 
     }
 
-    Button.OnClickListener cregistClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            //메뉴명,시간1,2를 읽어와서 메뉴 등록하기...?
-        }
-    };
-    Button.OnClickListener mClickCloseListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            //Dialog 종료
-            gDialog.dismiss();
-        }
-    };
+//    Button.OnClickListener cregistClickListener = new View.OnClickListener() {
+//        @Override
+//        public void onClick(View view) {
+//            //메뉴명,시간1,2를 읽어와서 메뉴 등록하기...?
+//        }
+//    };
+//    Button.OnClickListener mClickCloseListener = new View.OnClickListener() {
+//        @Override
+//        public void onClick(View v) {
+//            //Dialog 종료
+//            gDialog.dismiss();
+//        }
+//    };
 
     private void setMax() {
         final EditText edittext = new EditText(this);
@@ -182,13 +180,15 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(queueadapter);
 
         // 스피너 연결해주기
-        ArrayAdapter arrayAdapter1 = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, c.keySet().toArray());
+        arrayAdapter1 = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, c.keySet().toArray());
         spinner1.setAdapter(arrayAdapter1);
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 conName = spinner1.getItemAtPosition(position).toString(); // 선택됨 편의점 이름
-                ArrayAdapter arrayAdapter2 = new ArrayAdapter(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, c.get(conName).keySet().toArray());
+                arrayAdapter2 = new ArrayAdapter(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, c.get(conName).keySet().toArray());
+
+                Log.i()
                 spinner2.setAdapter(arrayAdapter2);
                 spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
@@ -205,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                ArrayAdapter arrayAdapter2 = new ArrayAdapter(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, c.get(spinner1.getItemAtPosition(0).toString()).keySet().toArray());
+                arrayAdapter2 = new ArrayAdapter(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, c.get(spinner1.getItemAtPosition(0).toString()).keySet().toArray());
                 spinner2.setAdapter(arrayAdapter2);
                 spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
