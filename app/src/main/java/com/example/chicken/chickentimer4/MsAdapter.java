@@ -3,7 +3,6 @@ package com.example.chicken.chickentimer4;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +10,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static com.example.chicken.chickentimer4.MainActivity.c;
-import static com.example.chicken.chickentimer4.MainActivity.msDialog;
 
 
 public class MsAdapter extends ArrayAdapter<String> {
@@ -22,12 +22,21 @@ public class MsAdapter extends ArrayAdapter<String> {
     Context context;
     Button delMenuBtn;
     String csName;
+    HashMap<String, ArrayList<Integer>> msList;
+    ArrayList<String> keyset;
 
-    public MsAdapter(@NonNull Context context, int resource, @NonNull List<String> objects, String selectedCs) {
-        super(context, resource, objects);
-        this.menuName = objects;
+
+    public MsAdapter(@NonNull Context context, int resource, HashMap<String, ArrayList<Integer>> msList, String selectedCs) {
+        super(context, resource);
+        this.msList = msList;
+
         this.context = context;
         this.csName = selectedCs;
+    }
+
+    @Override
+    public int getCount() {
+        return msList.size();
     }
 
     @NonNull
@@ -40,22 +49,23 @@ public class MsAdapter extends ArrayAdapter<String> {
             v = vi.inflate(R.layout.ms_row, null);
         }
 
-        TextView Fname = v.findViewById(R.id.Fname);
+        final TextView Fname = v.findViewById(R.id.Fname);
         TextView first = v.findViewById(R.id.first);
         TextView second = v.findViewById(R.id.second);
 
-        Fname.setText(menuName.get(position));
-        Log.i("cscs", csName + "");
-        Log.i("cscs", menuName + "");
-        first.setText(c.get(csName).get(menuName.get(position)).get(0).toString());
-        second.setText(c.get(csName).get(menuName.get(position)).get(1).toString());
+
+        keyset = new ArrayList<>(msList.keySet());
+        Fname.setText(keyset.get(position));
+        first.setText(msList.get(keyset.get(position)).get(0).toString());
+        second.setText(msList.get(keyset.get(position)).get(1).toString());
 
         Button delMenuBtn = v.findViewById(R.id.delMenuBtn);
         delMenuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 제품 삭제 시키기
-
+                msList.remove(Fname.getText().toString());
+                notifyDataSetChanged();
+                c.get(csName).remove(msList.get(position));
             }
         });
 

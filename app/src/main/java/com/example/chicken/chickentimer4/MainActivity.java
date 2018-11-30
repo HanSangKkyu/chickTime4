@@ -1,8 +1,6 @@
 package com.example.chicken.chickentimer4;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -23,7 +21,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Locale;
 
 import static android.speech.tts.TextToSpeech.ERROR;
@@ -50,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView; // 대기큐를 출력하는데 사용하는 RecyclerView
 
     static MsDialog msDialog;
-    static ArrayList<String> msList; // 제품 정보가 아이템으로 들어가는 ArrayList
+    //static ArrayList<String> msList; // 제품 정보가 아이템으로 들어가는 ArrayList
+    static HashMap<String, ArrayList<Integer>> msList;
     static MsAdapter msAdapter;
 
     private Button startCssChange;

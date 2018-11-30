@@ -7,17 +7,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 import static com.example.chicken.chickentimer4.MainActivity.c;
 import static com.example.chicken.chickentimer4.MainActivity.cssList;
@@ -71,7 +66,7 @@ public class GAdapter extends BaseAdapter {
         csBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                msList = new ArrayList<>(c.get(cssList.get(position)).keySet()); // 누른 버튼에 편의점으로 다이어로그를 세팅한다.
+                msList = new HashMap<>(c.get(cssList.get(position))); // 누른 버튼에 편의점으로 다이어로그를 세팅한다.
                 msAdapter = new MsAdapter(v.getContext(), R.layout.ms_dialog_layout, msList, cssList.get(position));
 
                 msDialog = new MsDialog(v.getContext(), msAdapter, cssList.get(position));

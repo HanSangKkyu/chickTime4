@@ -1,6 +1,5 @@
 package com.example.chicken.chickentimer4;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -13,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import static com.example.chicken.chickentimer4.MainActivity.arrayAdapter2;
 import static com.example.chicken.chickentimer4.MainActivity.c;
