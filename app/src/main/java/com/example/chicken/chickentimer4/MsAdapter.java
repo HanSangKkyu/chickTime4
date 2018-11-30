@@ -3,6 +3,7 @@ package com.example.chicken.chickentimer4;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static com.example.chicken.chickentimer4.MainActivity.arrayAdapter2;
 import static com.example.chicken.chickentimer4.MainActivity.c;
+import static com.example.chicken.chickentimer4.MainActivity.spinner2;
 
 
 public class MsAdapter extends ArrayAdapter<String> {
@@ -64,8 +67,17 @@ public class MsAdapter extends ArrayAdapter<String> {
             @Override
             public void onClick(View v) {
                 msList.remove(Fname.getText().toString());
+                c.get(csName).remove(Fname.getText().toString());
+
                 notifyDataSetChanged();
-                c.get(csName).remove(msList.get(position));
+
+                Log.i("cResult", msList.get(position) + "");
+                Log.i("cResult", c.get(csName) + "");
+
+
+                // 스피너 업데이트
+                arrayAdapter2 = new ArrayAdapter(v.getContext(), R.layout.support_simple_spinner_dropdown_item, c.get(csName).keySet().toArray());
+                spinner2.setAdapter(arrayAdapter2);
             }
         });
 

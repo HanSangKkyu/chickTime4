@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -13,9 +14,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import static com.example.chicken.chickentimer4.MainActivity.arrayAdapter1;
+import static com.example.chicken.chickentimer4.MainActivity.arrayAdapter2;
 import static com.example.chicken.chickentimer4.MainActivity.c;
 import static com.example.chicken.chickentimer4.MainActivity.cssList;
 import static com.example.chicken.chickentimer4.MainActivity.gAdapter;
+import static com.example.chicken.chickentimer4.MainActivity.spinner1;
+import static com.example.chicken.chickentimer4.MainActivity.spinner2;
 
 public class GDialog extends Dialog {
     private EditText ed;
@@ -47,7 +51,8 @@ public class GDialog extends Dialog {
                 cssList = new ArrayList<>(c.keySet());
                 Log.i("cssList", cssList + "");
                 gAdapter.notifyDataSetChanged();
-                arrayAdapter1.notifyDataSetChanged();
+
+
             }
         });
     }

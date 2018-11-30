@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -12,10 +13,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static com.example.chicken.chickentimer4.MainActivity.arrayAdapter2;
 import static com.example.chicken.chickentimer4.MainActivity.c;
 import static com.example.chicken.chickentimer4.MainActivity.msAdapter;
+import static com.example.chicken.chickentimer4.MainActivity.msList;
+import static com.example.chicken.chickentimer4.MainActivity.spinner2;
 
 
 public class MsDialog extends Dialog {
@@ -57,8 +61,13 @@ public class MsDialog extends Dialog {
                     time.add(Integer.parseInt(m2.getText().toString()));
                 }
                 c.get(csName).put(menuN, time);
-                msAdapter.notifyDataSetChanged();
-                arrayAdapter2.notifyDataSetChanged();
+                msList = new HashMap<>(c.get(csName)); // 누른 버튼에 편의점으로 다이어로그를 세팅한다.
+//                msAdapter.notifyDataSetChanged();
+                msAdapter = new MsAdapter(getContext(), R.layout.ms_dialog_layout, msList, csName);
+                listView.setAdapter(msAdapter);
+
+                arrayAdapter2 = new ArrayAdapter(v.getContext(), R.layout.support_simple_spinner_dropdown_item, c.get(csName).keySet().toArray());
+                spinner2.setAdapter(arrayAdapter2);
             }
         });
 

@@ -29,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
 
     static int MAX; // 등록가능한 최대 타이머 개수
 
-    Spinner spinner1; // 편의점을 선택하는 스피너
-    Spinner spinner2; // ff 제품을 선택하는 스피너
+    static Spinner spinner1; // 편의점을 선택하는 스피너
+    static Spinner spinner2; // ff 제품을 선택하는 스피너
     static HashMap<String, HashMap<String, ArrayList<Integer>>> c; // ff 제품에 대한 정보를 저장하고 있는 변수
 
 

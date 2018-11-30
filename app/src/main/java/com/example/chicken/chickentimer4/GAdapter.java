@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,12 +15,15 @@ import android.widget.TextView;
 
 import java.util.HashMap;
 
+import static com.example.chicken.chickentimer4.MainActivity.arrayAdapter1;
+import static com.example.chicken.chickentimer4.MainActivity.arrayAdapter2;
 import static com.example.chicken.chickentimer4.MainActivity.c;
 import static com.example.chicken.chickentimer4.MainActivity.cssList;
 import static com.example.chicken.chickentimer4.MainActivity.gDialog;
 import static com.example.chicken.chickentimer4.MainActivity.msAdapter;
 import static com.example.chicken.chickentimer4.MainActivity.msDialog;
 import static com.example.chicken.chickentimer4.MainActivity.msList;
+import static com.example.chicken.chickentimer4.MainActivity.spinner1;
 
 
 public class GAdapter extends BaseAdapter {
@@ -85,6 +89,11 @@ public class GAdapter extends BaseAdapter {
                 notifyDataSetChanged();
                 //실제 데이터 부분에도 삭제 해주기, 중복되는 부분 있으면 안된다.
                 c.remove(str);
+
+
+                // 스피너 업데이트
+                arrayAdapter1 = new ArrayAdapter(v.getContext(), R.layout.support_simple_spinner_dropdown_item, c.keySet().toArray());
+                spinner1.setAdapter(arrayAdapter2);
             }
         });
         return v;
