@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void css_init() {
         cssList = new ArrayList<>(c.keySet());
-        gAdapter = new GAdapter(this, R.layout.css_dialog_layout, cssList);
+        gAdapter = new GAdapter(this);
 
         startCssChange = (Button) findViewById(R.id.manageBtn);
         startCssChange.setOnClickListener(new View.OnClickListener() {
@@ -188,7 +188,8 @@ public class MainActivity extends AppCompatActivity {
                 conName = spinner1.getItemAtPosition(position).toString(); // 선택됨 편의점 이름
                 arrayAdapter2 = new ArrayAdapter(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, c.get(conName).keySet().toArray());
 
-                Log.i()
+                Log.i("cStructure", c.keySet() + "");
+                Log.i("cStructure", c.get(conName).keySet() + "");
                 spinner2.setAdapter(arrayAdapter2);
                 spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
