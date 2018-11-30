@@ -52,7 +52,9 @@ public class GDialog extends Dialog {
                 Log.i("cssList", cssList + "");
                 gAdapter.notifyDataSetChanged();
 
-
+                // 스피너 업데이트
+                arrayAdapter1 = new ArrayAdapter(view.getContext(), R.layout.support_simple_spinner_dropdown_item, c.keySet().toArray());
+                spinner1.setAdapter(arrayAdapter1);
             }
         });
     }

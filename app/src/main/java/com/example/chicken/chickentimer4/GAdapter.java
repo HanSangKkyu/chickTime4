@@ -16,7 +16,6 @@ import android.widget.TextView;
 import java.util.HashMap;
 
 import static com.example.chicken.chickentimer4.MainActivity.arrayAdapter1;
-import static com.example.chicken.chickentimer4.MainActivity.arrayAdapter2;
 import static com.example.chicken.chickentimer4.MainActivity.c;
 import static com.example.chicken.chickentimer4.MainActivity.cssList;
 import static com.example.chicken.chickentimer4.MainActivity.gDialog;
@@ -93,7 +92,7 @@ public class GAdapter extends BaseAdapter {
 
                 // 스피너 업데이트
                 arrayAdapter1 = new ArrayAdapter(v.getContext(), R.layout.support_simple_spinner_dropdown_item, c.keySet().toArray());
-                spinner1.setAdapter(arrayAdapter2);
+                spinner1.setAdapter(arrayAdapter1);
             }
         });
         return v;
