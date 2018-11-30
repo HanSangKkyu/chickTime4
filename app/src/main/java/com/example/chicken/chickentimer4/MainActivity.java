@@ -1,6 +1,8 @@
 package com.example.chicken.chickentimer4;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -12,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -20,6 +23,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Locale;
 
 import static android.speech.tts.TextToSpeech.ERROR;
@@ -45,6 +49,14 @@ public class MainActivity extends AppCompatActivity {
     LinearLayoutManager layoutManager; // RecyclerView 설정을 수평으로 만들어 주기 위함
     RecyclerView recyclerView; // 대기큐를 출력하는데 사용하는 RecyclerView
 
+    static MsDialog msDialog;
+    ArrayList<FF> cssList;
+    ArrayList<FF> msList;
+    static MsAdapter msAdapter;
+    private Button startCssChange;
+    static GDialog gDialog;
+    static GAdapter gAdapter;
+
     static TextToSpeech tts;// tts 객체 생성
 
     @Override
@@ -52,10 +64,56 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         data_init();
         view_init();
         setMax(); // 타이머 최대치 설정
+
+        //ms_init();
+        css_init();
+
     }
+/*
+    private void ms_init() {
+        msAdapter = new MsAdapter(this, R.layout.ms_dialog_layout, registedList);
+
+        startCssChange = (Button) findViewById(R.id.manageBtn);
+        startCssChange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                msDialog = new MsDialog(view.getContext(), msAdapter, mregistClickListener, mClickCloseListener);
+                msDialog.show();
+            }
+        });
+
+    }*/
+    private void css_init() {
+        gAdapter = new GAdapter(this, R.layout.css_dialog_layout, cssList);
+
+        startCssChange = (Button) findViewById(R.id.manageBtn);
+        startCssChange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gDialog = new GDialog(view.getContext(), gAdapter, cregistClickListener, mClickCloseListener);
+                gDialog.show();
+            }
+        });
+
+    }
+
+    Button.OnClickListener cregistClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            //메뉴명,시간1,2를 읽어와서 메뉴 등록하기...?
+        }
+    };
+    Button.OnClickListener mClickCloseListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            //Dialog 종료
+            gDialog.dismiss();
+        }
+    };
 
     private void setMax() {
         final EditText edittext = new EditText(this);
@@ -101,7 +159,6 @@ public class MainActivity extends AppCompatActivity {
         c.get("CU").put("cf1", new ArrayList<Integer>(Arrays.asList(3, 7)));
         c.get("CU").put("cf2", new ArrayList<Integer>(Arrays.asList(3, 7)));
         c.get("CU").put("cf3", new ArrayList<Integer>(Arrays.asList(3, 7)));
-
 
         //Log.i("test", c.get("미니스톱").keySet().toArray().length + "");
     }

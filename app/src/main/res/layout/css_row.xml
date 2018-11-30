@@ -13,9 +13,6 @@
         android:layout_height="wrap_content"
         android:text="편의점이름"/>
 
-
-
-
     <ImageView
         android:src="@drawable/chicken"
         android:alpha="0.2"

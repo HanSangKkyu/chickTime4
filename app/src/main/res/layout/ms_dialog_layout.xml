@@ -5,14 +5,27 @@
     android:orientation="vertical"
     android:gravity="center"
     android:layout_gravity="center">
-    <TextView
-        android:id="@+id/which"
-        android:text="00 편의점 메뉴 관리"
-        android:textStyle="bold"
-        android:padding="10dp"
-        android:background="#56a383"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/which"
+            android:text="00 편의점 메뉴 관리"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:background="#56a383"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Button
+            android:text="X"
+            android:id="@+id/msClose"
+            android:textStyle="bold"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
