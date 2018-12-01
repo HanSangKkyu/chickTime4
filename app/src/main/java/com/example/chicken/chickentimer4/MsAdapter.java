@@ -23,7 +23,7 @@ import static com.example.chicken.chickentimer4.MainActivity.spinner2;
 
 
 public class MsAdapter extends ArrayAdapter<String> {
-    List<String> menuName;
+    //List<String> menuName;
     Context context;
     Button delMenuBtn;
     String csName;
