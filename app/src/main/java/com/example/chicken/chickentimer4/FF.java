@@ -51,4 +51,12 @@ public class FF {
     public void setActive(boolean active) {
         isActive = active;
     }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
 }
