@@ -27,7 +27,6 @@ public class GDialog extends Dialog {
     private Button addCS, closeBt;
     //  private GAdapter gAdapter;
     private GridView gView;
-    private OnDismissListener onDismissListener = null;
 
     @Override
 
@@ -39,6 +38,12 @@ public class GDialog extends Dialog {
         addCS = (Button) findViewById(R.id.addCS);
         gView = (GridView) findViewById(R.id.gridView);
         closeBt = (Button) findViewById(R.id.cssClose);
+        closeBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
 
         gView.setAdapter(gAdapter);
 
