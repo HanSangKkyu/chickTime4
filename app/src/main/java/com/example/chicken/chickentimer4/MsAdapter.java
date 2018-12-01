@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +18,7 @@ import java.util.List;
 
 import static com.example.chicken.chickentimer4.MainActivity.arrayAdapter2;
 import static com.example.chicken.chickentimer4.MainActivity.c;
+import static com.example.chicken.chickentimer4.MainActivity.registedList;
 import static com.example.chicken.chickentimer4.MainActivity.spinner2;
 
 
@@ -60,12 +62,24 @@ public class MsAdapter extends ArrayAdapter<String> {
         keyset = new ArrayList<>(msList.keySet());
         Fname.setText(keyset.get(position));
         first.setText(msList.get(keyset.get(position)).get(0).toString());
-        second.setText(msList.get(keyset.get(position)).get(1).toString());
+        if (msList.get(keyset.get(position)).size() > 1) {
+            second.setText(msList.get(keyset.get(position)).get(1).toString());
+        } else {
+            second.setText("없음");
+        }
 
         Button delMenuBtn = v.findViewById(R.id.delMenuBtn);
         delMenuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                for (int i = 0; i < registedList.size(); i++) {
+                    if (registedList.get(i).getName() == Fname.getText().toString()) {
+                        // 삭제할려는 제품이 타이머로 등록돼있다면
+                        Toast.makeText(v.getContext(), "타이머에 등록된 제품은 삭제할 수 없습니다.", Toast.LENGTH_SHORT);
+                        return;
+                    }
+                }
+
                 msList.remove(Fname.getText().toString());
                 c.get(csName).remove(Fname.getText().toString());
 

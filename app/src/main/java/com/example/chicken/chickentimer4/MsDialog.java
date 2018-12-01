@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -47,12 +48,18 @@ public class MsDialog extends Dialog {
             @Override
             public void onClick(View v) {
                 String menuN = m_name.getText().toString();
+
+                if (c.get(csName).keySet().contains(menuN)) {
+                    Toast.makeText(v.getContext(), "이미 존재하는 제품입니다.", Toast.LENGTH_SHORT);
+                    return;
+                }
+
                 ArrayList<Integer> time = new ArrayList<>();
-                if (menuN.length() < 0) {
+                if (menuN.length() == 0) {
                     Toast.makeText(v.getContext(), "메뉴명을 입력해주세요.", Toast.LENGTH_SHORT);
                     return;
                 }
-                if (m1.getText().toString().length() < 0) {
+                if (m1.getText().toString().length() == 0) {
                     Toast.makeText(v.getContext(), "시간을 입력해주세요.", Toast.LENGTH_SHORT);
                     return;
                 }

@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,6 +46,13 @@ public class GDialog extends Dialog {
             @Override
             public void onClick(View view) {
                 String val = ed.getText().toString();
+
+
+                if (c.keySet().contains(val)) {
+                    Toast.makeText(view.getContext(), "이미 존재하는 편의점입니다.", Toast.LENGTH_SHORT);
+                    return;
+                }
+
                 //여기서 편의점 등록 하게 하면됨.
 
                 c.put(val, new HashMap<String, ArrayList<Integer>>());
