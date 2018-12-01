@@ -62,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
 
     static TextToSpeech tts;// tts 객체 생성
 
+    boolean isLock; //연속해서 등록되는 상황을 막기 위한 변수
+    ArrayList<FF> registedList4pause; //일시정지 기능을 대비해 선언한 변수
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
