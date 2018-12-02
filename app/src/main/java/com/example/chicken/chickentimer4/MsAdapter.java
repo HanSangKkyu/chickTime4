@@ -18,6 +18,7 @@ import java.util.List;
 
 import static com.example.chicken.chickentimer4.MainActivity.arrayAdapter2;
 import static com.example.chicken.chickentimer4.MainActivity.c;
+import static com.example.chicken.chickentimer4.MainActivity.queue;
 import static com.example.chicken.chickentimer4.MainActivity.registedList;
 import static com.example.chicken.chickentimer4.MainActivity.spinner2;
 
@@ -76,6 +77,12 @@ public class MsAdapter extends ArrayAdapter<String> {
                     if (registedList.get(i).getName() == Fname.getText().toString()) {
                         // 삭제할려는 제품이 타이머로 등록돼있다면
                         Toast.makeText(v.getContext(), "타이머에 등록된 제품은 삭제할 수 없습니다.", Toast.LENGTH_SHORT);
+                        return;
+                    }
+                }
+                for (int i = 0; i < queue.size(); i++) {
+                    if (queue.get(i).getName() == Fname.getText().toString()) {
+                        Toast.makeText(context, "큐에 등록된 제품은 삭제할 수 없습니다.", Toast.LENGTH_SHORT);
                         return;
                     }
                 }

@@ -23,6 +23,7 @@ import static com.example.chicken.chickentimer4.MainActivity.gDialog;
 import static com.example.chicken.chickentimer4.MainActivity.msAdapter;
 import static com.example.chicken.chickentimer4.MainActivity.msDialog;
 import static com.example.chicken.chickentimer4.MainActivity.msList;
+import static com.example.chicken.chickentimer4.MainActivity.queue;
 import static com.example.chicken.chickentimer4.MainActivity.registedList;
 import static com.example.chicken.chickentimer4.MainActivity.spinner1;
 
@@ -94,6 +95,13 @@ public class GAdapter extends BaseAdapter {
                         return;
                     }
                 }
+                for (int i = 0; i < queue.size(); i++) {
+                    if (queue.get(i).getCompany() == str) {
+                        Toast.makeText(context, "큐에 등록된 편의점은 삭제할 수 없습니다.", Toast.LENGTH_SHORT);
+                        return;
+                    }
+                }
+
 
                 Log.i("deleteStore", str);
                 cssList.remove(position);

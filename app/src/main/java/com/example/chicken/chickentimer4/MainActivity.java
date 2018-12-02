@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     static ListView listView; // 타이머를 표시해줄 리스트뷰
     // 타이머를 표시해줄 리스트뷰
     static ArrayList<FF> registedList; // 현재 등록된 타이머 정보들
-    ArrayList<FF> queue;
+    static ArrayList<FF> queue;
     String conName; // 타이머 등록시 FF클래스 객체 생성자에 넘겨줄 편의점 이름 변수
     String FFName; // 타이머 등록시 FF클래스 객체 생성자에 넘겨줄 FF 제품 이름 변수
     ArrayList<Integer> times; // 타이머 등록시 FF클래스 객체 생성자에 넘겨줄 n가지 시간 변수
