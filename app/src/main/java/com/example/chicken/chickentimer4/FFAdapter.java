@@ -51,6 +51,11 @@ public class FFAdapter extends ArrayAdapter<FF> {
             LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = vi.inflate(R.layout.row, null);
         }
+        if(registedList.get(position).getTime().size()==1){
+            LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            v = vi.inflate(R.layout.row, null);
+        }
+
         final FF ff = mFF.get(position);
         // 알람음 초기화
         initAlarm(position);
@@ -59,7 +64,13 @@ public class FFAdapter extends ArrayAdapter<FF> {
         final ProgressBar fTime;
 
         mTime = v.findViewById(R.id.Mtime);
+        mTime.setVisibility(View.VISIBLE);
         fTime = v.findViewById(R.id.Ftime);
+        Log.i("timesize", registedList.get(position).getTime() + " " + position);
+        if (registedList.get(position).getTime().size() > 1) {
+            Log.i("timesize", "in");
+            fTime.setVisibility(View.VISIBLE);
+        }
         mTime.setMax(100);
         fTime.setMax(100);
 
@@ -264,7 +275,7 @@ public class FFAdapter extends ArrayAdapter<FF> {
                 while (true) {
                     try {
                         ActiveTimeNum = 0;
-                            for (int i = 0; i < registedList.size(); i++) {
+                        for (int i = 0; i < registedList.size(); i++) {
                             if (registedList.get(i).isActive == false && registedList.get(i).getTime_p().get(0) > 0) {
                                 ActiveTimeNum++;
                             }
