@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
     static TextToSpeech tts;// tts 객체 생성
 
-    boolean isLock; //연속해서 등록되는 상황을 막기 위한 변수
+    boolean isLock = false; //연속해서 등록되는 상황을 막기 위한 변수
     ArrayList<FF> registedList4pause; //일시정지 기능을 대비해 선언한 변수
 
     @Override
@@ -238,6 +238,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onButton1Clicked(View view) {
+        if (isLock)
+            return;
 //        times[0] = c.get(conName).get(FFName)[0];
 //        times[1] = c.get(conName).get(FFName)[1];
         times = c.get(conName).get(FFName);
@@ -262,6 +264,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         registOnRegistedList(ff); // 타이머로 등록
+
     }
 
     public void onQueueBtnClicked(View view) {
